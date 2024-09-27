@@ -1,0 +1,14 @@
+# Auto-detect text files, ensure they use LF.
+* text=auto
+*.php text eol=lf diff=php
+
+# Exclude non-essential files from dist
+/.github/ export-ignore
+/scripts/ export-ignore
+/tests/ export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/compose.yml export-ignore
+/phpstan.neon export-ignore
+/README.md export-ignore

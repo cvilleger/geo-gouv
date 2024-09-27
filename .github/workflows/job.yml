@@ -1,0 +1,18 @@
+name: "Cron Job"
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+
+jobs:
+  update:
+    name: "Update departements.json and commune-departement-*.json"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - run: "bash ./scripts/job.sh"
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          title: "(bot) Update resources"
+          commit-message: "(bot) Update resources"
+          delete-branch: true
