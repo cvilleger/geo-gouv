@@ -1,6 +1,6 @@
 {
     "name": "cvilleger/geo-gouv",
-    "description": "Simple Geo Gouv Lib",
+    "description": "Simple Geo Gouv Library. Query geographic reference data more easily.",
     "homepage": "https://github.com/cvilleger/geo-gouv",
     "license": "MIT",
     "type": "library",
