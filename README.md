@@ -1,7 +1,7 @@
 <h1 align="center">cvilleger/geo-gouv</h1>
 
 <p align="center">
-    <strong>Simple Geo Gouv Library</strong>
+    <strong>Simple Geo Gouv Library. Query geographic reference data more easily</strong>
 </p>
 
 
