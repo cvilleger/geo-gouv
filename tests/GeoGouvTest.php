@@ -9,6 +9,11 @@ use Cvilleger\GeoGouv\Model\Commune;
 use Cvilleger\GeoGouv\Model\Departement;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 class GeoGouvTest extends TestCase
 {
     public function testGetDepartments(): void
