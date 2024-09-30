@@ -30,9 +30,11 @@ class GeoGouvTest extends TestCase
     {
         $client = new Client();
 
-        $communes = $client->getCommunesByDepartementCode('01');
+        foreach ($client->getDepartements() as $departement) {
+            $communes = $client->getCommunesByDepartementCode($departement->code);
 
-        self::assertIsArray($communes);
-        self::assertInstanceOf(Commune::class, $communes[0]);
+            self::assertIsArray($communes);
+            self::assertInstanceOf(Commune::class, $communes[0]);
+        }
     }
 }

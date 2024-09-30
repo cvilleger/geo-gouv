@@ -52,7 +52,7 @@ final class Client
                     coordinates: $commune['centre']['coordinates'],
                 ),
                 surface: $commune['surface'],
-                population: $commune['population'],
+                population: $commune['population'] ?? 0,
                 departement: new CommuneDepartement(
                     nom: $commune['departement']['nom'],
                     code: $commune['departement']['code'],
