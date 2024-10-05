@@ -72,6 +72,16 @@ final class Client
             throw new \RuntimeException('Unable to open file: '.$filepath);
         }
 
-        return json_decode($contents, true);
+        try {
+            $arrayContent = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new \RuntimeException('Unable to parse JSON: '.$e->getMessage(), $e->getCode(), $e);
+        }
+
+        if (false === is_array($arrayContent)) {
+            throw new \RuntimeException('Unable to parse JSON string: '.$filepath);
+        }
+
+        return $arrayContent;
     }
 }
