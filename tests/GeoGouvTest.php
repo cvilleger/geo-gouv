@@ -23,6 +23,7 @@ class GeoGouvTest extends TestCase
         $departements = $client->getDepartements();
 
         self::assertIsArray($departements);
+        self::assertNotEmpty($departements);
         self::assertInstanceOf(Departement::class, $departements[0]);
     }
 
@@ -34,6 +35,7 @@ class GeoGouvTest extends TestCase
             $communes = $client->getCommunesByDepartementCode($departement->code);
 
             self::assertIsArray($communes);
+            self::assertNotEmpty($communes);
             self::assertInstanceOf(Commune::class, $communes[0]);
         }
     }
