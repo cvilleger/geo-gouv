@@ -46,8 +46,8 @@ Cvilleger\GeoGouv\Model\Departement Object
     [codeRegion] => 84
     [region] => Cvilleger\GeoGouv\Model\Region Object
         (
-            [nom] => Ain
-            [code] => 01
+            [nom] => Auvergne-Rhône-Alpes
+            [code] => 84
         )
 
 )
