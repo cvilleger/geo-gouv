@@ -28,8 +28,8 @@ final class Client
                 code: $departement['code'],
                 codeRegion: $departement['codeRegion'],
                 region: new Region(
-                    nom: $departement['nom'],
-                    code: $departement['code'],
+                    nom: $departement['region']['nom'],
+                    code: $departement['region']['code'],
                 ),
             );
         }, $this->getArrayFromFilepath($filepath));
