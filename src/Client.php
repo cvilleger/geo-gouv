@@ -20,8 +20,6 @@ final class Client
      */
     public function getDepartements(): array
     {
-        $filepath = self::RESOURCES_DIRECTORY.'/departements.json';
-
         return array_map(static function (array $departement) {
             return new Departement(
                 nom: $departement['nom'],
@@ -32,16 +30,14 @@ final class Client
                     code: $departement['region']['code'],
                 ),
             );
-        }, $this->getArrayFromFilepath($filepath));
+        }, $this->getDepartmentsArray());
     }
 
     /**
      * @return Commune[]
      */
-    public function getCommunesByDepartementCode(string $departementCode): array
+    public function getCommunesByDepartementCode(string $departmentCode): array
     {
-        $filepath = sprintf('%s/commune-departement-%s.json', self::RESOURCES_DIRECTORY, $departementCode);
-
         return array_map(static function (array $commune) {
             return new Commune(
                 nom: $commune['nom'],
@@ -62,7 +58,21 @@ final class Client
                     code: $commune['region']['code'],
                 ),
             );
-        }, $this->getArrayFromFilepath($filepath));
+        }, $this->getMunicipalitiesArrayByDepartmentCode($departmentCode));
+    }
+
+    private function getDepartmentsArray(): array
+    {
+        return $this->getArrayFromFilepath(
+            filepath: self::RESOURCES_DIRECTORY.'/departements.json',
+        );
+    }
+
+    private function getMunicipalitiesArrayByDepartmentCode(string $departmentCode): array
+    {
+        return $this->getArrayFromFilepath(
+            filepath: self::RESOURCES_DIRECTORY.'/commune-departement-'.$departmentCode.'.json',
+        );
     }
 
     private function getArrayFromFilepath(string $filepath): array
