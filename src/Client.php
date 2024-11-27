@@ -10,10 +10,19 @@ use Cvilleger\GeoGouv\Model\CommuneDepartement;
 use Cvilleger\GeoGouv\Model\CommuneRegion;
 use Cvilleger\GeoGouv\Model\Departement;
 use Cvilleger\GeoGouv\Model\Region;
+use Cvilleger\GeoGouv\Provider\DepartementProvider;
+use Cvilleger\GeoGouv\Provider\MunicipalityProvider;
 
 final class Client
 {
-    private const RESOURCES_DIRECTORY = __DIR__.'/../resources';
+    private DepartementProvider $departementProvider;
+    private MunicipalityProvider $municipalityProvider;
+
+    public function __construct()
+    {
+        $this->departementProvider = new DepartementProvider();
+        $this->municipalityProvider = new MunicipalityProvider();
+    }
 
     /**
      * @return Departement[]
@@ -30,7 +39,7 @@ final class Client
                     code: $departement['region']['code'],
                 ),
             );
-        }, $this->getDepartmentsArray());
+        }, $this->departementProvider->getDepartments());
     }
 
     /**
@@ -58,40 +67,6 @@ final class Client
                     code: $commune['region']['code'],
                 ),
             );
-        }, $this->getMunicipalitiesArrayByDepartmentCode($departmentCode));
-    }
-
-    private function getDepartmentsArray(): array
-    {
-        return $this->getArrayFromFilepath(
-            filepath: self::RESOURCES_DIRECTORY.'/departements.json',
-        );
-    }
-
-    private function getMunicipalitiesArrayByDepartmentCode(string $departmentCode): array
-    {
-        return $this->getArrayFromFilepath(
-            filepath: self::RESOURCES_DIRECTORY.'/commune-departement-'.$departmentCode.'.json',
-        );
-    }
-
-    private function getArrayFromFilepath(string $filepath): array
-    {
-        $contents = file_get_contents($filepath);
-        if (false === $contents) {
-            throw new \RuntimeException('Unable to open file: '.$filepath);
-        }
-
-        try {
-            $arrayContent = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            throw new \RuntimeException('Unable to parse JSON: '.$e->getMessage(), $e->getCode(), $e);
-        }
-
-        if (false === is_array($arrayContent)) {
-            throw new \RuntimeException('Unable to parse JSON string: '.$filepath);
-        }
-
-        return $arrayContent;
+        }, $this->municipalityProvider->getMunicipalities($departmentCode));
     }
 }
