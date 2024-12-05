@@ -14,6 +14,9 @@ use Cvilleger\GeoGouv\Model\Region;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 #[CoversClass(Client::class)]
 #[CoversClass(Departement::class)]
 #[CoversClass(Region::class)]
