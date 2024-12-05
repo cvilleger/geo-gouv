@@ -20,7 +20,7 @@ final class Client
      */
     public function getDepartements(): array
     {
-        $filepath = self::RESOURCES_DIRECTORY.'/departements.json';
+        $filename = 'departements.json';
 
         return array_map(static function (array $departement) {
             return new Departement(
@@ -32,7 +32,7 @@ final class Client
                     code: $departement['region']['code'],
                 ),
             );
-        }, $this->getArrayFromFilepath($filepath));
+        }, $this->getDataFromFilename($filename));
     }
 
     /**
@@ -40,7 +40,7 @@ final class Client
      */
     public function getCommunesByDepartementCode(string $departementCode): array
     {
-        $filepath = sprintf('%s/commune-departement-%s.json', self::RESOURCES_DIRECTORY, $departementCode);
+        $filename = 'commune-departement-'.$departementCode.'.json';
 
         return array_map(static function (array $commune) {
             return new Commune(
@@ -62,11 +62,13 @@ final class Client
                     code: $commune['region']['code'],
                 ),
             );
-        }, $this->getArrayFromFilepath($filepath));
+        }, $this->getDataFromFilename($filename));
     }
 
-    private function getArrayFromFilepath(string $filepath): array
+    private function getDataFromFilename(string $filename): array
     {
+        $filepath = self::RESOURCES_DIRECTORY.'/'.$filename;
+
         $contents = file_get_contents($filepath);
         if (false === $contents) {
             throw new \RuntimeException('Unable to open file: '.$filepath);
