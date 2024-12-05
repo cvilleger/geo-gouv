@@ -5,15 +5,22 @@ declare(strict_types=1);
 namespace Cvilleger\Test\GeoGouv;
 
 use Cvilleger\GeoGouv\Client;
+use Cvilleger\GeoGouv\Model\Centre;
 use Cvilleger\GeoGouv\Model\Commune;
+use Cvilleger\GeoGouv\Model\CommuneDepartement;
+use Cvilleger\GeoGouv\Model\CommuneRegion;
 use Cvilleger\GeoGouv\Model\Departement;
+use Cvilleger\GeoGouv\Model\Region;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversClass(Client::class)]
+#[CoversClass(Departement::class)]
+#[CoversClass(Region::class)]
+#[CoversClass(Centre::class)]
+#[CoversClass(Commune::class)]
+#[CoversClass(CommuneDepartement::class)]
+#[CoversClass(CommuneRegion::class)]
 class GeoGouvTest extends TestCase
 {
     public function testGetDepartments(): void

@@ -22,7 +22,8 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          coverage: xdebug
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
       - run: "vendor/bin/phpstan analyse"
-      - run: "vendor/bin/phpunit tests"
+      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text"
