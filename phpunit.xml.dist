@@ -24,9 +24,9 @@
         </include>
     </source>
 
-<!--    <coverage>-->
-<!--        <report>-->
-<!--            <clover outputFile="clover.xml"/>-->
-<!--        </report>-->
-<!--    </coverage>-->
+    <coverage>
+        <report>
+            <clover outputFile="clover.xml"/>
+        </report>
+    </coverage>
 </phpunit>

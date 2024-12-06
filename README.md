@@ -4,6 +4,7 @@
 [![GitHub License](https://img.shields.io/github/license/cvilleger/geo-gouv?style=for-the-badge)](https://github.com/cvilleger/geo-gouv?tab=MIT-1-ov-file#readme)
 
 # cvilleger/geo-gouv
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dd8dadd1483e48328f45dcccc7fc045d)](https://app.codacy.com/gh/cvilleger/geo-gouv/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## About
 

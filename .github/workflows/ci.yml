@@ -26,4 +26,8 @@ jobs:
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
       - run: "vendor/bin/phpstan analyse"
-      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text"
+      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit"
+      - uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: clover.xml
