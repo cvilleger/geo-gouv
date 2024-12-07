@@ -45,6 +45,5 @@ class GeoGouvTest extends TestCase
 
         self::assertNotEmpty($communes);
         self::assertInstanceOf(Commune::class, $communes[0]);
-
     }
 }
