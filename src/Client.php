@@ -71,7 +71,7 @@ final class Client
 
         $contents = file_get_contents($filepath);
         if (false === $contents) {
-            throw new \RuntimeException('Unable to open file: '.$filepath);
+            throw new \RuntimeException('Unable to open JSON file');
         }
 
         try {
@@ -81,7 +81,7 @@ final class Client
         }
 
         if (false === is_array($arrayContent)) {
-            throw new \RuntimeException('Unable to parse JSON string: '.$filepath);
+            throw new \RuntimeException('Unable to parse JSON string');
         }
 
         return $arrayContent;
