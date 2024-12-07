@@ -16,16 +16,25 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        php: ['8.2', '8.3']
+        php: ['8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          coverage: xdebug
+          coverage: none
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
-      - run: "vendor/bin/phpstan analyse"
+  report:
+    name: "Report"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: xdebug
+      - run: "composer install --no-interaction"
       - run: "XDEBUG_MODE=coverage vendor/bin/phpunit"
       - uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
