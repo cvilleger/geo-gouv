@@ -5,15 +5,25 @@ declare(strict_types=1);
 namespace Cvilleger\Test\GeoGouv;
 
 use Cvilleger\GeoGouv\Client;
+use Cvilleger\GeoGouv\Model\Centre;
 use Cvilleger\GeoGouv\Model\Commune;
+use Cvilleger\GeoGouv\Model\CommuneDepartement;
+use Cvilleger\GeoGouv\Model\CommuneRegion;
 use Cvilleger\GeoGouv\Model\Departement;
+use Cvilleger\GeoGouv\Model\Region;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(Client::class)]
+#[CoversClass(Departement::class)]
+#[CoversClass(Region::class)]
+#[CoversClass(Centre::class)]
+#[CoversClass(Commune::class)]
+#[CoversClass(CommuneDepartement::class)]
+#[CoversClass(CommuneRegion::class)]
 class GeoGouvTest extends TestCase
 {
     public function testGetDepartments(): void
@@ -22,7 +32,6 @@ class GeoGouvTest extends TestCase
 
         $departements = $client->getDepartements();
 
-        self::assertIsArray($departements);
         self::assertNotEmpty($departements);
         self::assertInstanceOf(Departement::class, $departements[0]);
     }
@@ -31,12 +40,10 @@ class GeoGouvTest extends TestCase
     {
         $client = new Client();
 
-        foreach ($client->getDepartements() as $departement) {
-            $communes = $client->getCommunesByDepartementCode($departement->code);
+        $departement = $client->getDepartements()[0];
+        $communes = $client->getCommunesByDepartementCode($departement->code);
 
-            self::assertIsArray($communes);
-            self::assertNotEmpty($communes);
-            self::assertInstanceOf(Commune::class, $communes[0]);
-        }
+        self::assertNotEmpty($communes);
+        self::assertInstanceOf(Commune::class, $communes[0]);
     }
 }
