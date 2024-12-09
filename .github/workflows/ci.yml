@@ -25,19 +25,4 @@ jobs:
           coverage: none
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
-  report:
-    name: "Report"
-    needs: testing
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          coverage: xdebug
-      - run: "composer install --no-interaction"
-      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-      - uses: codacy/codacy-coverage-reporter-action@v1.3.0
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: clover.xml
+      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text"
