@@ -25,4 +25,5 @@ jobs:
           coverage: xdebug
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
+      - run: "vendor/bin/psalm --long-progress"
       - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text"
