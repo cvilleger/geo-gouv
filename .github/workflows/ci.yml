@@ -16,7 +16,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        php: ['8.2', '8.3']
+        php: ['8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -25,4 +25,5 @@ jobs:
           coverage: xdebug
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
+      - run: "vendor/bin/psalm --long-progress --show-info=true"
       - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text"
