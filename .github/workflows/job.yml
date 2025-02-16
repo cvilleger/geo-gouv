@@ -15,4 +15,3 @@ jobs:
         with:
           title: "(bot) Update resources"
           commit-message: "(bot) Update resources"
-          delete-branch: true
