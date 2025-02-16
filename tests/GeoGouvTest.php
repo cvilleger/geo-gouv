@@ -24,7 +24,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Commune::class)]
 #[CoversClass(CommuneDepartement::class)]
 #[CoversClass(CommuneRegion::class)]
-class GeoGouvTest extends TestCase
+final class GeoGouvTest extends TestCase
 {
     public function testGetDepartments(): void
     {
