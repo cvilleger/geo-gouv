@@ -1,6 +1,6 @@
 services:
   web:
-    image: webdevops/php-nginx-dev:8.2-alpine
+    image: webdevops/php-nginx-dev:8.3-alpine
     user: application
     working_dir: /app
     volumes:
