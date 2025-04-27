@@ -16,7 +16,7 @@ Query geographic reference data more easily using offline data from [Gouv admini
 
 ## Requirements
 
-`cvilleger/geo-gouv` requires at least PHP 8.2
+`cvilleger/geo-gouv` requires at least PHP 8.3
 
 ## Installation
 
