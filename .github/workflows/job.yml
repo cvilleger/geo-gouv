@@ -2,7 +2,7 @@ name: "Cron Job"
 
 on:
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: "0 3 * * 0"
 
 jobs:
   update:
@@ -10,7 +10,10 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
-      - run: "bash ./scripts/job.sh"
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+      - run: "php -f ./scripts/job.php"
       - uses: peter-evans/create-pull-request@v7
         with:
           title: "(bot) Update resources"

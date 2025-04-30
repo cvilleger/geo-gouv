@@ -52,7 +52,7 @@ final class Client
                     coordinates: $commune['centre']['coordinates'],
                 ),
                 surface: $commune['surface'],
-                population: $commune['population'] ?? 0,
+                population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
                 departement: new CommuneDepartement(
                     nom: $commune['departement']['nom'],
                     code: $commune['departement']['code'],
