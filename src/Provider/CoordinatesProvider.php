@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cvilleger\GeoGouv\Provider;
 
-class CoordinatesProvider
+final class CoordinatesProvider
 {
     public function getByDepartementCode(string $departementCode): string
     {
