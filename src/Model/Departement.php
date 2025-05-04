@@ -10,6 +10,7 @@ final class Departement
         public string $nom,
         public string $code,
         public string $codeRegion,
+        public string $coordinates,
         public Region $region,
     ) {}
 }

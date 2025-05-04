@@ -10,10 +10,11 @@ use Cvilleger\GeoGouv\Model\CommuneDepartement;
 use Cvilleger\GeoGouv\Model\CommuneRegion;
 use Cvilleger\GeoGouv\Model\Departement;
 use Cvilleger\GeoGouv\Model\Region;
+use Cvilleger\GeoGouv\Provider\CoordinatesProvider;
 
 final class Client
 {
-    private const RESOURCES_DIRECTORY = __DIR__.'/../resources';
+    private const string RESOURCES_DIRECTORY = __DIR__.'/../resources';
 
     /**
      * @return Departement[]
@@ -21,18 +22,21 @@ final class Client
     public function getDepartements(): array
     {
         $filename = 'departements.json';
-
-        return array_map(static function (array $departement) {
-            return new Departement(
+        $departements = [];
+        foreach ($this->getDataFromFilename($filename) as $departement) {
+            $departements[] = new Departement(
                 nom: $departement['nom'],
                 code: $departement['code'],
                 codeRegion: $departement['codeRegion'],
+                coordinates: (new CoordinatesProvider())->getByDepartementCode($departement['code']),
                 region: new Region(
                     nom: $departement['region']['nom'],
                     code: $departement['region']['code'],
                 ),
             );
-        }, $this->getDataFromFilename($filename));
+        }
+
+        return $departements;
     }
 
     /**

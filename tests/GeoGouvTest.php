@@ -11,6 +11,7 @@ use Cvilleger\GeoGouv\Model\CommuneDepartement;
 use Cvilleger\GeoGouv\Model\CommuneRegion;
 use Cvilleger\GeoGouv\Model\Departement;
 use Cvilleger\GeoGouv\Model\Region;
+use Cvilleger\GeoGouv\Provider\CoordinatesProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -24,6 +25,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Commune::class)]
 #[CoversClass(CommuneDepartement::class)]
 #[CoversClass(CommuneRegion::class)]
+#[CoversClass(CoordinatesProvider::class)]
 final class GeoGouvTest extends TestCase
 {
     public function testGetDepartments(): void
