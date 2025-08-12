@@ -46,27 +46,25 @@ final class Client
     {
         $filename = 'commune-departement-'.$departementCode.'.json';
 
-        return array_map(static function (array $commune) {
-            return new Commune(
-                nom: $commune['nom'],
-                code: $commune['code'],
-                codesPostaux: $commune['codesPostaux'],
-                centre: new Centre(
-                    type: $commune['centre']['type'],
-                    coordinates: $commune['centre']['coordinates'],
-                ),
-                surface: $commune['surface'],
-                population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
-                departement: new CommuneDepartement(
-                    nom: $commune['departement']['nom'],
-                    code: $commune['departement']['code'],
-                ),
-                region: new CommuneRegion(
-                    nom: $commune['region']['nom'],
-                    code: $commune['region']['code'],
-                ),
-            );
-        }, $this->getDataFromFilename($filename));
+        return array_map(static fn (array $commune): Commune => new Commune(
+            nom: $commune['nom'],
+            code: $commune['code'],
+            codesPostaux: $commune['codesPostaux'],
+            centre: new Centre(
+                type: $commune['centre']['type'],
+                coordinates: $commune['centre']['coordinates'],
+            ),
+            surface: $commune['surface'],
+            population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
+            departement: new CommuneDepartement(
+                nom: $commune['departement']['nom'],
+                code: $commune['departement']['code'],
+            ),
+            region: new CommuneRegion(
+                nom: $commune['region']['nom'],
+                code: $commune['region']['code'],
+            ),
+        ), $this->getDataFromFilename($filename));
     }
 
     private function getDataFromFilename(string $filename): array
@@ -80,8 +78,8 @@ final class Client
 
         try {
             $arrayContent = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            throw new \RuntimeException('Unable to parse JSON: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (\JsonException $jsonException) {
+            throw new \RuntimeException('Unable to parse JSON: '.$jsonException->getMessage(), $jsonException->getCode(), $jsonException);
         }
 
         if (false === is_array($arrayContent)) {
