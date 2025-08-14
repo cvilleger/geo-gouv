@@ -18,11 +18,11 @@ $departementsCodes = array_column($departementsData, 'code');
 echo "DEPARTEMENTS_CODES: " . implode(', ', $departementsCodes) . PHP_EOL;
 
 // Télécharger les données des communes pour chaque département
-foreach ($departementsCodes as $depCode) {
-    echo "COMMUNE_CODE: " . $depCode . PHP_EOL;
-    $communesUrl = $communesUrlStart . $depCode . $communesUrlEnd;
+foreach ($departementsCodes as $departementCode) {
+    echo "COMMUNE_CODE: " . $departementCode . PHP_EOL;
+    $communesUrl = $communesUrlStart . $departementCode . $communesUrlEnd;
     $communesData = file_get_contents($communesUrl);
-    $communeFilename = "./resources/commune-departement-" . $depCode . ".json";
+    $communeFilename = "./resources/commune-departement-" . $departementCode . ".json";
     file_put_contents($communeFilename, $communesData);
     usleep(100000); // 0.1 seconde
 }

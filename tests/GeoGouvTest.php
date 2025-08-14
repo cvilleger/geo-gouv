@@ -34,8 +34,8 @@ final class GeoGouvTest extends TestCase
 
         $departements = $client->getDepartements();
 
-        self::assertNotEmpty($departements);
-        self::assertInstanceOf(Departement::class, $departements[0]);
+        $this->assertNotEmpty($departements);
+        $this->assertInstanceOf(Departement::class, $departements[0]);
     }
 
     public function testGetCommunesByDepartementCode(): void
@@ -45,7 +45,7 @@ final class GeoGouvTest extends TestCase
         $departement = $client->getDepartements()[0];
         $communes = $client->getCommunesByDepartementCode($departement->code);
 
-        self::assertNotEmpty($communes);
-        self::assertInstanceOf(Commune::class, $communes[0]);
+        $this->assertNotEmpty($communes);
+        $this->assertInstanceOf(Commune::class, $communes[0]);
     }
 }
