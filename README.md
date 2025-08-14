@@ -44,6 +44,7 @@ Cvilleger\GeoGouv\Model\Departement Object
     [nom] => Ain
     [code] => 01
     [codeRegion] => 84
+    [coordinates] => 46.06551335, 5.28478031423462
     [region] => Cvilleger\GeoGouv\Model\Region Object
         (
             [nom] => Auvergne-Rhône-Alpes
