@@ -25,6 +25,7 @@ Install this package as a dependency using [Composer](https://getcomposer.org).
 ``` bash
   composer require cvilleger/geo-gouv
 ```
+*Note that this package has **zero composer dependencies.***
 
 ## Usage
 
