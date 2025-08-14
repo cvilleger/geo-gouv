@@ -7,7 +7,7 @@
 
 ## About
 
-Query geographic reference data more easily using offline data from [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
+Query geographic reference data easily using offline data from 🇫🇷 [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
 
 ## Features
 
@@ -16,14 +16,14 @@ Query geographic reference data more easily using offline data from [Gouv admini
 
 ## Requirements
 
-`cvilleger/geo-gouv` requires at least PHP 8.3
+- PHP 8.3 or above
 
 ## Installation
 
 Install this package as a dependency using [Composer](https://getcomposer.org).
 
 ``` bash
-composer require cvilleger/geo-gouv
+  composer require cvilleger/geo-gouv
 ```
 
 ## Usage
