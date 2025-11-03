@@ -11,6 +11,7 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withPhpSets()
+    ->withComposerBased()
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -20,6 +21,5 @@ return RectorConfig::configure()
         naming: true,
         instanceOf: true,
         earlyReturn: true,
-        strictBooleans: true,
         phpunitCodeQuality: true,
     );
