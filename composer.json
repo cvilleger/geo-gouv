@@ -1,6 +1,6 @@
 {
     "name": "cvilleger/geo-gouv",
-    "description": "Simple Geo Gouv Library. Query geographic reference data more easily.",
+    "description": "Simple Geo Gouv Library. Query geographic reference data easily.",
     "homepage": "https://github.com/cvilleger/geo-gouv",
     "license": "MIT",
     "type": "library",
@@ -18,11 +18,11 @@
         "php": "^8.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.3",
-        "friendsofphp/php-cs-fixer": "^3.85",
+        "phpunit/phpunit": "^12.4",
+        "friendsofphp/php-cs-fixer": "^3.89",
         "phpstan/phpstan": "^2.1",
         "vimeo/psalm": "^6.13",
-        "rector/rector": "^2.1"
+        "rector/rector": "^2.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
