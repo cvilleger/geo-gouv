@@ -29,7 +29,7 @@ Install this package as a dependency using [Composer](https://getcomposer.org).
 
 ## Usage
 
-### Retrieve all departments
+### Retrieve departments
 
 ``` php
 use Cvilleger\GeoGouv\Client;
@@ -56,7 +56,7 @@ Cvilleger\GeoGouv\Model\Departement Object
 */
 ```
 
-### Retrieve all municipalities by department code
+### Retrieve municipalities by department code
 
 ``` php
 use Cvilleger\GeoGouv\Client;
