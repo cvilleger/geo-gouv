@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.4
       - run: "php -f ./scripts/job.php"
       - uses: peter-evans/create-pull-request@v8
         with:
