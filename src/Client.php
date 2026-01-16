@@ -28,7 +28,7 @@ final class Client
                 nom: $departement['nom'],
                 code: $departement['code'],
                 codeRegion: $departement['codeRegion'],
-                coordinates: (new CoordinatesProvider())->getByDepartementCode($departement['code']),
+                coordinates: new CoordinatesProvider()->getByDepartementCode($departement['code']),
                 region: new Region(
                     nom: $departement['region']['nom'],
                     code: $departement['region']['code'],
