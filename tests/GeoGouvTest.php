@@ -17,29 +17,26 @@ final class GeoGouvTest extends TestCase
 {
     public function testGetDepartmentsIsNotEmpty(): void
     {
-        $departements = new Client()->getDepartements();
-
-        $this->assertNotEmpty($departements);
+        $this->assertNotEmpty(new Client()->getDepartments());
     }
 
-    public function testGetCommunesByDepartementCodeIsNotEmpty(): void
+    public function testGetMunicipalitiesByDepartmentCodeIsNotEmpty(): void
     {
         $client = new Client();
 
-        $departement = $client->getDepartements()[0];
-        $communes = $client->getCommunesByDepartementCode(
-            departementCode: $departement->code,
+        $communes = $client->getMunicipalitiesByDepartmentCode(
+            departmentCode: $client->getDepartments()[0]->code,
         );
 
         $this->assertNotEmpty($communes);
     }
 
-    public function testGetCommunesByDepartementName(): void
+    public function testGetCommunesByDepartementCodeWithBadInputThrowException(): void
     {
         $this->expectException(NotFoundException::class);
 
-        new Client()->getCommunesByDepartementCode(
-            departementCode: 'test',
+        new Client()->getMunicipalitiesByDepartmentCode(
+            departmentCode: 'test',
         );
     }
 }

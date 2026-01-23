@@ -6,9 +6,9 @@ namespace Cvilleger\GeoGouv\Provider;
 
 final readonly class CoordinatesProvider
 {
-    public function getByDepartementCode(string $departementCode): string
+    public function getByDepartmentCode(string $departmentCode): string
     {
-        $departements = [
+        $departments = [
             '01' => '46.06551335, 5.28478031423462',
             '02' => '49.45328545, 3.60689900359406',
             '03' => '46.36746405, 3.16388284831195',
@@ -112,6 +112,6 @@ final readonly class CoordinatesProvider
             '976' => '-12.823048, 45.1520755',
         ];
 
-        return $departements[$departementCode];
+        return $departments[$departmentCode];
     }
 }

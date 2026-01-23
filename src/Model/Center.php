@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Cvilleger\GeoGouv\Model;
 
-final readonly class CommuneDepartement
+final readonly class Center
 {
     public function __construct(
-        public string $nom,
-        public string $code,
+        public string $type,
+        public array $coordinates,
     ) {}
 }

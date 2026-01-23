@@ -7,7 +7,7 @@ namespace Cvilleger\GeoGouv\Model;
 final readonly class Region
 {
     public function __construct(
-        public string $nom,
+        public string $name,
         public string $code,
     ) {}
 }

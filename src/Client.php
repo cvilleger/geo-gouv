@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Cvilleger\GeoGouv;
 
 use Cvilleger\GeoGouv\Exception\NotFoundException;
-use Cvilleger\GeoGouv\Model\Centre;
-use Cvilleger\GeoGouv\Model\Commune;
-use Cvilleger\GeoGouv\Model\CommuneDepartement;
-use Cvilleger\GeoGouv\Model\CommuneRegion;
-use Cvilleger\GeoGouv\Model\Departement;
+use Cvilleger\GeoGouv\Model\Center;
+use Cvilleger\GeoGouv\Model\Department;
+use Cvilleger\GeoGouv\Model\Municipality;
+use Cvilleger\GeoGouv\Model\MunicipalityDepartment;
+use Cvilleger\GeoGouv\Model\MunicipalityRegion;
 use Cvilleger\GeoGouv\Model\Region;
 use Cvilleger\GeoGouv\Provider\CoordinatesProvider;
 
@@ -18,20 +18,22 @@ final readonly class Client
     private const string RESOURCES_DIRECTORY = __DIR__.'/../resources';
 
     /**
-     * @return Departement[]
+     * @return Department[]
      */
-    public function getDepartements(): array
+    public function getDepartments(): array
     {
         $filename = 'departements.json';
         $departements = [];
         foreach ($this->getDataFromFilename($filename) as $departement) {
-            $departements[] = new Departement(
-                nom: $departement['nom'],
+            $departements[] = new Department(
+                name: $departement['nom'],
                 code: $departement['code'],
-                codeRegion: $departement['codeRegion'],
-                coordinates: new CoordinatesProvider()->getByDepartementCode($departement['code']),
+                regionCode: $departement['codeRegion'],
+                coordinates: new CoordinatesProvider()->getByDepartmentCode(
+                    departmentCode: $departement['code'],
+                ),
                 region: new Region(
-                    nom: $departement['region']['nom'],
+                    name: $departement['region']['nom'],
                     code: $departement['region']['code'],
                 ),
             );
@@ -41,28 +43,28 @@ final readonly class Client
     }
 
     /**
-     * @return Commune[]
+     * @return Municipality[]
      */
-    public function getCommunesByDepartementCode(string $departementCode): array
+    public function getMunicipalitiesByDepartmentCode(string $departmentCode): array
     {
-        $filename = 'commune-departement-'.$departementCode.'.json';
+        $filename = 'commune-departement-'.$departmentCode.'.json';
 
-        return array_map(static fn (array $commune): Commune => new Commune(
-            nom: $commune['nom'],
+        return array_map(static fn (array $commune): Municipality => new Municipality(
+            name: $commune['nom'],
             code: $commune['code'],
-            codesPostaux: $commune['codesPostaux'],
-            centre: new Centre(
+            postalCodes: $commune['codesPostaux'],
+            center: new Center(
                 type: $commune['centre']['type'],
                 coordinates: $commune['centre']['coordinates'],
             ),
             surface: $commune['surface'],
             population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
-            departement: new CommuneDepartement(
-                nom: $commune['departement']['nom'],
+            department: new MunicipalityDepartment(
+                name: $commune['departement']['nom'],
                 code: $commune['departement']['code'],
             ),
-            region: new CommuneRegion(
-                nom: $commune['region']['nom'],
+            region: new MunicipalityRegion(
+                name: $commune['region']['nom'],
                 code: $commune['region']['code'],
             ),
         ), $this->getDataFromFilename($filename));
