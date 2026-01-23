@@ -10,7 +10,7 @@ final readonly class Municipality
         public string $name,
         public string $code,
         public array $postalCodes,
-        public Center $center,
+        public array $coordinates,
         public float $surface,
         public int $population,
         public MunicipalityDepartment $department,

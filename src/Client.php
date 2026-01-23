@@ -53,10 +53,7 @@ final readonly class Client
             name: $commune['nom'],
             code: $commune['code'],
             postalCodes: $commune['codesPostaux'],
-            center: new Center(
-                type: $commune['centre']['type'],
-                coordinates: $commune['centre']['coordinates'],
-            ),
+            coordinates: $commune['centre']['coordinates'],
             surface: $commune['surface'],
             population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
             department: new MunicipalityDepartment(

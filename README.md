@@ -7,7 +7,7 @@
 
 ## About
 
-Query geographic reference data easily using offline data from 🇫🇷 [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
+Query geographic reference data using offline data from 🇫🇷 [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
 
 ## Features
 
@@ -16,7 +16,7 @@ Query geographic reference data easily using offline data from 🇫🇷 [Gouv ad
 
 ## Requirements
 
-- PHP 8.3 or above
+- PHP 8.5 or above
 
 ## Installation
 
@@ -36,19 +36,19 @@ use Cvilleger\GeoGouv\Client;
 
 $client = new Client();
 
-$departements = $client->getDepartements();
+$departments = $client->getDepatements();
 
-print_r($departements[0]);
+print_r($departments[0]);
 /*
-Cvilleger\GeoGouv\Model\Departement Object
+Cvilleger\GeoGouv\Model\Department Object
 (
-    [nom] => Ain
+    [name] => Ain
     [code] => 01
-    [codeRegion] => 84
+    [regionCode] => 84
     [coordinates] => 46.06551335, 5.28478031423462
     [region] => Cvilleger\GeoGouv\Model\Region Object
         (
-            [nom] => Auvergne-Rhône-Alpes
+            [name] => Auvergne-Rhône-Alpes
             [code] => 84
         )
 
@@ -63,21 +63,20 @@ use Cvilleger\GeoGouv\Client;
 
 $client = new Client();
 
-$communes = $client->getCommunesByDepartementCode('01');
+$municipalities = $client->getMunicipalitiesByDepartmentCode('01');
 
-print_r($communes[0]);
+print_r($municipalities[0]);
 /*
 (
-    [nom] => L'Abergement-Clémenciat
+    [name] => L'Abergement-Clémenciat
     [code] => 01001
-    [codesPostaux] => Array
+    [postalCodes] => Array
         (
             [0] => 01400
         )
 
-    [centre] => Cvilleger\GeoGouv\Model\Centre Object
+    [center] => Cvilleger\GeoGouv\Model\Center Object
         (
-            [type] => Point
             [coordinates] => Array
                 (
                     [0] => 4.9306
@@ -88,15 +87,15 @@ print_r($communes[0]);
 
     [surface] => 1564.5
     [population] => 832
-    [departement] => Cvilleger\GeoGouv\Model\CommuneDepartement Object
+    [department] => Cvilleger\GeoGouv\Model\MunicipalityDepartment Object
         (
-            [nom] => Ain
+            [name] => Ain
             [code] => 01
         )
 
-    [region] => Cvilleger\GeoGouv\Model\CommuneRegion Object
+    [region] => Cvilleger\GeoGouv\Model\MunicipalitRegion Object
         (
-            [nom] => Auvergne-Rhône-Alpes
+            [name] => Auvergne-Rhône-Alpes
             [code] => 84
         )
 
