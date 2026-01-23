@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cvilleger\GeoGouv\Model;
 
-final class Commune
+final readonly class Commune
 {
     public function __construct(
         public string $nom,

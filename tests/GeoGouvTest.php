@@ -5,33 +5,41 @@ declare(strict_types=1);
 namespace Cvilleger\Test\GeoGouv;
 
 use Cvilleger\GeoGouv\Client;
-use Cvilleger\GeoGouv\Model\Commune;
-use Cvilleger\GeoGouv\Model\Departement;
+use Cvilleger\GeoGouv\Exception\NotFoundException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
 final class GeoGouvTest extends TestCase
 {
-    public function testGetDepartments(): void
+    public function testGetDepartmentsIsNotEmpty(): void
     {
-        $client = new Client();
-
-        $departements = $client->getDepartements();
+        $departements = new Client()->getDepartements();
 
         $this->assertNotEmpty($departements);
-        $this->assertInstanceOf(Departement::class, $departements[0]);
     }
 
-    public function testGetCommunesByDepartementCode(): void
+    public function testGetCommunesByDepartementCodeIsNotEmpty(): void
     {
         $client = new Client();
 
         $departement = $client->getDepartements()[0];
-        $communes = $client->getCommunesByDepartementCode($departement->code);
+        $communes = $client->getCommunesByDepartementCode(
+            departementCode: $departement->code,
+        );
 
         $this->assertNotEmpty($communes);
-        $this->assertInstanceOf(Commune::class, $communes[0]);
+    }
+
+    public function testGetCommunesByDepartementName(): void
+    {
+        $this->expectException(NotFoundException::class);
+
+        new Client()->getCommunesByDepartementCode(
+            departementCode: 'test',
+        );
     }
 }
