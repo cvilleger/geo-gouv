@@ -1,28 +1,28 @@
 <?php
 
 $apiGouvBaseUrl = "https://geo.api.gouv.fr";
-$apiGouvDepartementsUrl = $apiGouvBaseUrl . "/departements?fields=nom,code,codeRegion,region";
-$departementsFilename = "./resources/departements.json";
-$communesUrlStart = $apiGouvBaseUrl . "/departements/";
-$communesUrlEnd = "/communes?fields=nom,code,codesPostaux,centre,surface,population,departement,region";
+$apiGouvDepartmentsUrl = $apiGouvBaseUrl . "/departements?fields=nom,code,codeRegion,region";
+$departmentsFilename = "./resources/departements.json";
+$municipalitiesUrlStart = $apiGouvBaseUrl . "/departements/";
+$municipalitiesUrlEnd = "/communes?fields=nom,code,codesPostaux,centre,surface,population,departement,region";
 
-// Télécharger les départements
-file_put_contents($departementsFilename, file_get_contents($apiGouvDepartementsUrl));
+// Retrive departments data from API and save to local file
+file_put_contents($departmentsFilename, file_get_contents($apiGouvDepartmentsUrl));
 
-// Lire et décoder le fichier JSON des départements
-$departementsData = json_decode(file_get_contents($departementsFilename), true, 512, JSON_THROW_ON_ERROR);
+// Read and decode the JSON file of departments
+$departmentsData = json_decode(file_get_contents($departmentsFilename), true, 512, JSON_THROW_ON_ERROR);
 
-// Extraire les codes des départements
-$departementsCodes = array_column($departementsData, 'code');
+// Extract department codes
+$departmentsCodes = array_column($departmentsData, 'code');
 
-echo "DEPARTEMENTS_CODES: " . implode(', ', $departementsCodes) . PHP_EOL;
+echo "DEPARTMENTS_CODES: " . implode(', ', $departmentsCodes) . PHP_EOL;
 
-// Télécharger les données des communes pour chaque département
-foreach ($departementsCodes as $departementCode) {
-    echo "COMMUNE_CODE: " . $departementCode . PHP_EOL;
-    $communesUrl = $communesUrlStart . $departementCode . $communesUrlEnd;
-    $communesData = file_get_contents($communesUrl);
-    $communeFilename = "./resources/commune-departement-" . $departementCode . ".json";
-    file_put_contents($communeFilename, $communesData);
+// Retrive municipalities data for each department and save to local files
+foreach ($departmentsCodes as $departmentCode) {
+    echo "DEPARTMENT_CODES: " . $departmentCode . PHP_EOL;
+    $municipalitiesUrl = $municipalitiesUrlStart . $departmentCode . $municipalitiesUrlEnd;
+    $municipalitiesData = file_get_contents($municipalitiesUrl);
+    $municipalityFilename = "./resources/commune-departement-" . $departmentCode . ".json";
+    file_put_contents($municipalityFilename, $municipalitiesData);
     usleep(100000); // 0.1 seconde
 }

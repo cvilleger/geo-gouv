@@ -23,23 +23,23 @@ final readonly class Client
     public function getDepartments(): array
     {
         $filename = 'departements.json';
-        $departements = [];
-        foreach ($this->getDataFromFilename($filename) as $departement) {
-            $departements[] = new Department(
-                name: $departement['nom'],
-                code: $departement['code'],
-                regionCode: $departement['codeRegion'],
+        $departments = [];
+        foreach ($this->getDataFromFilename($filename) as $department) {
+            $departments[] = new Department(
+                name: $department['nom'],
+                code: $department['code'],
+                regionCode: $department['codeRegion'],
                 coordinates: new CoordinatesProvider()->getByDepartmentCode(
-                    departmentCode: $departement['code'],
+                    departmentCode: $department['code'],
                 ),
                 region: new Region(
-                    name: $departement['region']['nom'],
-                    code: $departement['region']['code'],
+                    name: $department['region']['nom'],
+                    code: $department['region']['code'],
                 ),
             );
         }
 
-        return $departements;
+        return $departments;
     }
 
     /**
