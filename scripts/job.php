@@ -2,7 +2,7 @@
 
 $apiGouvBaseUrl = "https://geo.api.gouv.fr";
 $apiGouvDepartmentsUrl = $apiGouvBaseUrl . "/departements?fields=nom,code,codeRegion,region";
-$departmentsFilename = "./resources/departements.json";
+$departmentsFilename = "./resources/departments.json";
 $municipalitiesUrlStart = $apiGouvBaseUrl . "/departements/";
 $municipalitiesUrlEnd = "/communes?fields=nom,code,codesPostaux,centre,surface,population,departement,region";
 
@@ -22,7 +22,7 @@ foreach ($departmentsCodes as $departmentCode) {
     echo "DEPARTMENT_CODES: " . $departmentCode . PHP_EOL;
     $municipalitiesUrl = $municipalitiesUrlStart . $departmentCode . $municipalitiesUrlEnd;
     $municipalitiesData = file_get_contents($municipalitiesUrl);
-    $municipalityFilename = "./resources/commune-departement-" . $departmentCode . ".json";
+    $municipalityFilename = "./resources/municipality-" . $departmentCode . ".json";
     file_put_contents($municipalityFilename, $municipalitiesData);
     usleep(100000); // 0.1 seconde
 }

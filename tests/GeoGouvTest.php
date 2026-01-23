@@ -31,7 +31,7 @@ final class GeoGouvTest extends TestCase
         $this->assertNotEmpty($communes);
     }
 
-    public function testGetCommunesByDepartementCodeWithBadInputThrowException(): void
+    public function testGetMunicipalitiesByDepartmentCodeWithBadInputThrowException(): void
     {
         $this->expectException(NotFoundException::class);
 
