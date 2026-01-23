@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Cvilleger\GeoGouv;
 
 use Cvilleger\GeoGouv\Exception\NotFoundException;
-use Cvilleger\GeoGouv\Model\Center;
 use Cvilleger\GeoGouv\Model\Department;
 use Cvilleger\GeoGouv\Model\Municipality;
 use Cvilleger\GeoGouv\Model\MunicipalityDepartment;
