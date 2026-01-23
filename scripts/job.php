@@ -22,7 +22,7 @@ foreach ($departmentsCodes as $departmentCode) {
     echo "DEPARTMENT_CODES: " . $departmentCode . PHP_EOL;
     $municipalitiesUrl = $municipalitiesUrlStart . $departmentCode . $municipalitiesUrlEnd;
     $municipalitiesData = file_get_contents($municipalitiesUrl);
-    $municipalityFilename = "./resources/municipality-" . $departmentCode . ".json";
+    $municipalityFilename = "./resources/department-" . $departmentCode . ".json";
     file_put_contents($municipalityFilename, $municipalitiesData);
     usleep(100000); // 0.1 seconde
 }

@@ -45,9 +45,9 @@ final readonly class Client
     /**
      * @return Municipality[]
      */
-    public function getMunicipalitiesByDepartmentCode(string $departmentCode): array
+    public function getMunicipalitiesByCode(string $municipalityCode): array
     {
-        $filename = 'municipality-'.$departmentCode.'.json';
+        $filename = 'department-'.$municipalityCode.'.json';
 
         return array_map(static fn (array $commune): Municipality => new Municipality(
             name: $commune['nom'],

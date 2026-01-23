@@ -24,19 +24,19 @@ final class GeoGouvTest extends TestCase
     {
         $client = new Client();
 
-        $communes = $client->getMunicipalitiesByDepartmentCode(
-            departmentCode: $client->getDepartments()[0]->code,
+        $municipalities = $client->getMunicipalitiesByCode(
+            municipalityCode: $client->getDepartments()[0]->code,
         );
 
-        $this->assertNotEmpty($communes);
+        $this->assertNotEmpty($municipalities);
     }
 
     public function testGetMunicipalitiesByDepartmentCodeWithBadInputThrowException(): void
     {
         $this->expectException(NotFoundException::class);
 
-        new Client()->getMunicipalitiesByDepartmentCode(
-            departmentCode: 'test',
+        new Client()->getMunicipalitiesByCode(
+            municipalityCode: 'test',
         );
     }
 }
