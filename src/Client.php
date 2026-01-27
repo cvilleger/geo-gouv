@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Cvilleger\GeoGouv;
 
 use Cvilleger\GeoGouv\Exception\NotFoundException;
-use Cvilleger\GeoGouv\Model\Centre;
 use Cvilleger\GeoGouv\Model\Commune;
 use Cvilleger\GeoGouv\Model\CommuneDepartement;
 use Cvilleger\GeoGouv\Model\CommuneRegion;
@@ -51,12 +50,9 @@ final readonly class Client
             nom: $commune['nom'],
             code: $commune['code'],
             codesPostaux: $commune['codesPostaux'],
-            centre: new Centre(
-                type: $commune['centre']['type'],
-                coordinates: $commune['centre']['coordinates'],
-            ),
+            coordinates: $commune['centre']['coordinates'],
             surface: $commune['surface'],
-            population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
+            population: $commune['population'],
             departement: new CommuneDepartement(
                 nom: $commune['departement']['nom'],
                 code: $commune['departement']['code'],

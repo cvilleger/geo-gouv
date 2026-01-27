@@ -10,7 +10,7 @@ final class Commune
         public string $nom,
         public string $code,
         public array $codesPostaux,
-        public Centre $centre,
+        public array $coordinates,
         public float $surface,
         public int $population,
         public CommuneDepartement $departement,
