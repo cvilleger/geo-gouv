@@ -75,15 +75,10 @@ print_r($communes[0]);
             [0] => 01400
         )
 
-    [centre] => Cvilleger\GeoGouv\Model\Centre Object
+    [coordinates] => Array
         (
-            [type] => Point
-            [coordinates] => Array
-                (
-                    [0] => 4.9306
-                    [1] => 46.1517
-                )
-
+            [0] => 4.9306
+            [1] => 46.1517
         )
 
     [surface] => 1564.5
@@ -99,7 +94,6 @@ print_r($communes[0]);
             [nom] => Auvergne-Rhône-Alpes
             [code] => 84
         )
-
 )
 */
 ```
