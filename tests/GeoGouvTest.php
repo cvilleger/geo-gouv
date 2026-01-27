@@ -5,47 +5,36 @@ declare(strict_types=1);
 namespace Cvilleger\Test\GeoGouv;
 
 use Cvilleger\GeoGouv\Client;
-use Cvilleger\GeoGouv\Model\Centre;
-use Cvilleger\GeoGouv\Model\Commune;
-use Cvilleger\GeoGouv\Model\CommuneDepartement;
-use Cvilleger\GeoGouv\Model\CommuneRegion;
-use Cvilleger\GeoGouv\Model\Departement;
-use Cvilleger\GeoGouv\Model\Region;
-use Cvilleger\GeoGouv\Provider\CoordinatesProvider;
-use PHPUnit\Framework\Attributes\CoversClass;
+use Cvilleger\GeoGouv\Exception\NotFoundException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversClass(Client::class)]
-#[CoversClass(Departement::class)]
-#[CoversClass(Region::class)]
-#[CoversClass(Centre::class)]
-#[CoversClass(Commune::class)]
-#[CoversClass(CommuneDepartement::class)]
-#[CoversClass(CommuneRegion::class)]
-#[CoversClass(CoordinatesProvider::class)]
 final class GeoGouvTest extends TestCase
 {
-    public function testGetDepartments(): void
+    public function testGetDepartmentsIsNotEmpty(): void
     {
-        $client = new Client();
-
-        $departements = $client->getDepartements();
-
-        $this->assertNotEmpty($departements);
-        $this->assertInstanceOf(Departement::class, $departements[0]);
+        $this->assertNotEmpty(new Client()->getDepartements());
     }
 
-    public function testGetCommunesByDepartementCode(): void
+    public function testGetCommunesByDepartementCodeIsNotEmpty(): void
     {
         $client = new Client();
 
-        $departement = $client->getDepartements()[0];
-        $communes = $client->getCommunesByDepartementCode($departement->code);
+        foreach ($client->getDepartements() as $departement) {
+            $this->assertNotEmpty($client->getCommunesByDepartementCode($departement->code));
+        }
+    }
 
-        $this->assertNotEmpty($communes);
-        $this->assertInstanceOf(Commune::class, $communes[0]);
+    public function testGetMunicipalitiesByDepartmentCodeWithBadInputThrowException(): void
+    {
+        $this->expectException(NotFoundException::class);
+
+        new Client()->getCommunesByDepartementCode(
+            departementCode: 'notADepartementCode',
+        );
     }
 }

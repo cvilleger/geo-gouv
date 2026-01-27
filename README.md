@@ -7,7 +7,7 @@
 
 ## About
 
-Query geographic reference data easily using offline data from 🇫🇷 [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
+Query geographic reference data using offline data from 🇫🇷 [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
 
 ## Features
 
@@ -16,7 +16,7 @@ Query geographic reference data easily using offline data from 🇫🇷 [Gouv ad
 
 ## Requirements
 
-- PHP 8.3 or above
+- PHP 8.5 or above
 
 ## Installation
 
