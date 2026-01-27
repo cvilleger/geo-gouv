@@ -18,9 +18,9 @@ jobs:
       - uses: actions/checkout@v6
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.4
-          coverage: xdebug
+          php-version: 8.5
+          coverage: none
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
       - run: "vendor/bin/psalm --long-progress"
-      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text"
+      - run: "vendor/bin/phpunit"

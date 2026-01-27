@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cvilleger\GeoGouv;
 
-use Cvilleger\GeoGouv\Model\Centre;
+use Cvilleger\GeoGouv\Exception\NotFoundException;
 use Cvilleger\GeoGouv\Model\Commune;
 use Cvilleger\GeoGouv\Model\CommuneDepartement;
 use Cvilleger\GeoGouv\Model\CommuneRegion;
@@ -12,7 +12,7 @@ use Cvilleger\GeoGouv\Model\Departement;
 use Cvilleger\GeoGouv\Model\Region;
 use Cvilleger\GeoGouv\Provider\CoordinatesProvider;
 
-final class Client
+final readonly class Client
 {
     private const string RESOURCES_DIRECTORY = __DIR__.'/../resources';
 
@@ -50,12 +50,9 @@ final class Client
             nom: $commune['nom'],
             code: $commune['code'],
             codesPostaux: $commune['codesPostaux'],
-            centre: new Centre(
-                type: $commune['centre']['type'],
-                coordinates: $commune['centre']['coordinates'],
-            ),
+            coordinates: $commune['centre']['coordinates'],
             surface: $commune['surface'],
-            population: $commune['population'] ?? 0, // Default to 0 if not present like 12320 Conques-en-Rouergue
+            population: $commune['population'],
             departement: new CommuneDepartement(
                 nom: $commune['departement']['nom'],
                 code: $commune['departement']['code'],
@@ -70,6 +67,9 @@ final class Client
     private function getDataFromFilename(string $filename): array
     {
         $filepath = self::RESOURCES_DIRECTORY.'/'.$filename;
+        if (false === file_exists($filepath)) {
+            throw new NotFoundException('JSON file not found: '.$filepath);
+        }
 
         $contents = file_get_contents($filepath);
         if (false === $contents) {
