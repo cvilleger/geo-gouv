@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cvilleger\GeoGouv;
 
+use Cvilleger\GeoGouv\Exception\NotFoundException;
 use Cvilleger\GeoGouv\Model\Centre;
 use Cvilleger\GeoGouv\Model\Commune;
 use Cvilleger\GeoGouv\Model\CommuneDepartement;
@@ -12,7 +13,7 @@ use Cvilleger\GeoGouv\Model\Departement;
 use Cvilleger\GeoGouv\Model\Region;
 use Cvilleger\GeoGouv\Provider\CoordinatesProvider;
 
-final class Client
+final readonly class Client
 {
     private const string RESOURCES_DIRECTORY = __DIR__.'/../resources';
 
@@ -70,6 +71,9 @@ final class Client
     private function getDataFromFilename(string $filename): array
     {
         $filepath = self::RESOURCES_DIRECTORY.'/'.$filename;
+        if (false === file_exists($filepath)) {
+            throw new NotFoundException('JSON file not found: '.$filepath);
+        }
 
         $contents = file_get_contents($filepath);
         if (false === $contents) {
