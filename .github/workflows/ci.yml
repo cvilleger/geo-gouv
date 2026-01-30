@@ -22,5 +22,6 @@ jobs:
           coverage: none
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
-      - run: "vendor/bin/psalm --long-progress"
+      - run: "vendor/bin/phpstan"
+      - run: "vendor/bin/psalm"
       - run: "vendor/bin/phpunit"

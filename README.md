@@ -34,11 +34,8 @@ Install this package as a dependency using [Composer](https://getcomposer.org).
 ``` php
 use Cvilleger\GeoGouv\Client;
 
-$client = new Client();
+print_r(new Client()->getDepartements()[0]);
 
-$departements = $client->getDepartements();
-
-print_r($departements[0]);
 /*
 Cvilleger\GeoGouv\Model\Departement Object
 (
@@ -61,11 +58,8 @@ Cvilleger\GeoGouv\Model\Departement Object
 ``` php
 use Cvilleger\GeoGouv\Client;
 
-$client = new Client();
+print_r(new Client()->getCommunesByDepartementCode('01')[0]);
 
-$communes = $client->getCommunesByDepartementCode('01');
-
-print_r($communes[0]);
 /*
 (
     [nom] => L'Abergement-Clémenciat
