@@ -21,7 +21,7 @@
         "phpunit/phpunit": "^12.5",
         "friendsofphp/php-cs-fixer": "^3.93",
         "phpstan/phpstan": "^2.1",
-        "vimeo/psalm": "^6.14",
+        "vimeo/psalm": "^6.15",
         "rector/rector": "^2.3"
     },
     "minimum-stability": "dev",

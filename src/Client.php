@@ -21,7 +21,7 @@ final readonly class Client
      */
     public function getDepartements(): array
     {
-        $filename = 'departements.json';
+        $filename = 'departments.json';
         $departements = [];
         foreach ($this->getDataFromFilename($filename) as $departement) {
             $departements[] = new Departement(
@@ -44,7 +44,7 @@ final readonly class Client
      */
     public function getCommunesByDepartementCode(string $departementCode): array
     {
-        $filename = 'commune-departement-'.$departementCode.'.json';
+        $filename = 'department-'.$departementCode.'.json';
 
         return array_map(static fn (array $commune): Commune => new Commune(
             nom: $commune['nom'],
