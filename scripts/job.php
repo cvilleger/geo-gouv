@@ -52,8 +52,15 @@ foreach ($departmentsCodes as $departmentCode) {
     echo 'DEPARTMENT_CODE: '.$departmentCode.PHP_EOL;
     file_put_contents(
         filename: sprintf($config['communesDataFilePattern'], $departmentCode),
-        data: file_get_contents(
-            filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'/'.$departmentCode.$communesUrlEnd,
+        data: json_encode(
+            value: json_decode(
+                json: file_get_contents(
+                    filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'/'.$departmentCode.$communesUrlEnd,
+                ),
+                associative: true,
+                flags: JSON_THROW_ON_ERROR,
+            ),
+            flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
         ),
     );
     usleep(100000); // 0.1 seconde
