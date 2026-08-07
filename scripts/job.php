@@ -16,31 +16,17 @@ $config = [
 
 
 // Retrieve and save the departments data
-file_put_contents(
-    filename: $config['departmentsDataFile'],
-    data: json_encode(
-        value: json_decode(
-            json: file_get_contents(
-                filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'?'.http_build_query($config['apiGouvDepartmentsQuery']),
-            ),
-            associative: true,
-            flags: JSON_THROW_ON_ERROR,
-        ),
-        flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-    ),
-);
+$config['apiGouvBaseUrl'] . $config['apiGouvDepartmentsPath'] . '?' . http_build_query($config['apiGouvDepartmentsQuery'])
+    |> file_get_contents(...)
+    |> (fn($x) => json_decode(json: $x, associative: true, flags: JSON_THROW_ON_ERROR,))
+    |> (fn($x) => json_encode(value: $x, flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,))
+    |> (fn($x) => file_put_contents(filename: $config['departmentsDataFile'], data: $x,));
 
 // Extract department codes
-$departmentsCodes = array_column(
-    array: json_decode(
-        json: file_get_contents(
-            filename: $config['departmentsDataFile'],
-        ),
-        associative: true,
-        flags: JSON_THROW_ON_ERROR,
-    ),
-    column_key: 'code',
-);
+$departmentsCodes = $config['departmentsDataFile']
+    |> file_get_contents(...)
+    |> (fn($x) => json_decode(json: $x, associative: true, flags: JSON_THROW_ON_ERROR,))
+    |> (fn($x) => array_column(array: $x, column_key: 'code',));
 
 echo 'DEPARTMENTS_CODES:'.implode(', ', $departmentsCodes).PHP_EOL;
 
@@ -50,18 +36,13 @@ $communesUrlEnd = $config['apiGouvCommunesPath'].'?'.http_build_query($config['a
 // Retrieve and save the communes data for each department
 foreach ($departmentsCodes as $departmentCode) {
     echo 'DEPARTMENT_CODE: '.$departmentCode.PHP_EOL;
+    $departmentData = $config['apiGouvBaseUrl'] . $config['apiGouvDepartmentsPath'] . '/' . $departmentCode . $communesUrlEnd
+        |> file_get_contents(...)
+        |> (fn($x) => json_decode(json: $x, associative: true, flags: JSON_THROW_ON_ERROR,))
+        |> (fn($x) => json_encode(value: $x, flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,));
     file_put_contents(
         filename: sprintf($config['communesDataFilePattern'], $departmentCode),
-        data: json_encode(
-            value: json_decode(
-                json: file_get_contents(
-                    filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'/'.$departmentCode.$communesUrlEnd,
-                ),
-                associative: true,
-                flags: JSON_THROW_ON_ERROR,
-            ),
-            flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-        ),
+        data: $departmentData,
     );
-    usleep(100000); // 0.1 seconde
+    usleep(100000); // 0.1 second
 }
