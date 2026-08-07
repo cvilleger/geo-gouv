@@ -14,26 +14,31 @@ $config = [
     'communesDataFilePattern' => './resources/department-%s.json',
 ];
 
+
 // Retrieve and save the departments data
 file_put_contents(
     filename: $config['departmentsDataFile'],
-    data: file_get_contents(
-        filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'?'.http_build_query($config['apiGouvDepartmentsQuery']),
+    data: json_encode(
+        value: json_decode(
+            json: file_get_contents(
+                filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'?'.http_build_query($config['apiGouvDepartmentsQuery']),
+            ),
+            associative: true,
+            flags: JSON_THROW_ON_ERROR,
+        ),
+        flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
     ),
-);
-
-// Read and decode the JSON file of departments
-$departmentsData = json_decode(
-    json: file_get_contents(
-        filename: $config['departmentsDataFile'],
-    ),
-    associative: true,
-    flags: JSON_THROW_ON_ERROR,
 );
 
 // Extract department codes
 $departmentsCodes = array_column(
-    array: $departmentsData,
+    array: json_decode(
+        json: file_get_contents(
+            filename: $config['departmentsDataFile'],
+        ),
+        associative: true,
+        flags: JSON_THROW_ON_ERROR,
+    ),
     column_key: 'code',
 );
 
@@ -45,9 +50,11 @@ $communesUrlEnd = $config['apiGouvCommunesPath'].'?'.http_build_query($config['a
 // Retrieve and save the communes data for each department
 foreach ($departmentsCodes as $departmentCode) {
     echo 'DEPARTMENT_CODE: '.$departmentCode.PHP_EOL;
-    $communesUrl = $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'/'.$departmentCode.$communesUrlEnd;
-    $communesData = file_get_contents($communesUrl);
-    $communeFilename = sprintf($config['communesDataFilePattern'], $departmentCode);
-    file_put_contents($communeFilename, $communesData);
+    file_put_contents(
+        filename: sprintf($config['communesDataFilePattern'], $departmentCode),
+        data: file_get_contents(
+            filename: $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'].'/'.$departmentCode.$communesUrlEnd,
+        ),
+    );
     usleep(100000); // 0.1 seconde
 }
