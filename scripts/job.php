@@ -14,7 +14,6 @@ $config = [
     'communesDataFilePattern' => './resources/department-%s.json',
 ];
 
-
 // Retrieve and save the departments data
 $config['apiGouvBaseUrl'] . $config['apiGouvDepartmentsPath'] . '?' . http_build_query($config['apiGouvDepartmentsQuery'])
     |> file_get_contents(...)
