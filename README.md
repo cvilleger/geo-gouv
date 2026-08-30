@@ -5,33 +5,32 @@
 
 # cvilleger/geo-gouv
 
-## About
+Client PHP léger pour interroger des données de référence géographiques françaises (dumps hors-ligne basés sur l'API officielle de l'État : https://geo.api.gouv.fr/decoupage-administratif).
 
-Query geographic reference data using offline data from 🇫🇷 [Gouv administrative division API](https://geo.api.gouv.fr/decoupage-administratif).
+## Fonctionnalités
 
-## Features
+- Récupération de la liste des départements
+- Récupération des communes d'un département
+- Modèles PHP pour les entités (Département, Région, Commune)
+- Aucun package externe requis (zéro dépendance Composer)
 
-- Query all departments data
-- Query all municipalities by department code
+## Exigences
 
-## Requirements
-
-- PHP 8.5 or above
+- PHP 8.5 ou supérieur
 
 ## Installation
 
-Install this package as a dependency using [Composer](https://getcomposer.org).
+Installer via Composer :
 
-``` bash
-  composer require cvilleger/geo-gouv
+```bash
+composer require cvilleger/geo-gouv
 ```
-*Note that this package has **zero composer dependencies.***
 
-## Usage
+## Utilisation
 
-### Retrieve departments
+Récupérer les départements :
 
-``` php
+```php
 use Cvilleger\GeoGouv\Client;
 
 print_r(new Client()->getDepartements()[0]);
@@ -53,9 +52,9 @@ Cvilleger\GeoGouv\Model\Departement Object
 */
 ```
 
-### Retrieve municipalities by department code
+Récupérer les communes d'un département (ex. `01`) :
 
-``` php
+```php
 use Cvilleger\GeoGouv\Client;
 
 print_r(new Client()->getCommunesByDepartementCode('01')[0]);
@@ -91,3 +90,11 @@ print_r(new Client()->getCommunesByDepartementCode('01')[0]);
 )
 */
 ```
+
+## Données et mises à jour
+
+Les données proviennent de l'API publique `geo.api.gouv.fr`. Mettre à jour régulièrement la librairie pour refléter les changements administratifs.
+
+## Licence
+
+MIT — voir le fichier LICENSE.
