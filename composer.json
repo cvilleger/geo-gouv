@@ -1,17 +1,18 @@
 {
     "name": "cvilleger/geo-gouv",
-    "description": "Simple Geo Gouv Library. Query geographic reference data.",
+    "description": "Simple Geo Gouv library to query geographic reference data.",
     "homepage": "https://github.com/cvilleger/geo-gouv",
     "license": "MIT",
     "type": "library",
     "keywords": [
         "geo",
-        "gouv"
+        "gouv",
+        "geo-gouv"
     ],
     "authors": [
         {
-            "name": "Christophe Villeger",
-            "homepage": "https://www.linkedin.com/in/villegerchristophe/"
+            "name": "Christophe V",
+            "homepage": "https://github.com/cvilleger"
         }
     ],
     "require": {
@@ -21,11 +22,18 @@
         "phpunit/phpunit": "^13.3",
         "friendsofphp/php-cs-fixer": "^3.95",
         "phpstan/phpstan": "^2.2",
-        "vimeo/psalm": "^6.16",
         "rector/rector": "^2.6"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.5"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Cvilleger\\GeoGouv\\": "src/"
