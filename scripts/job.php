@@ -18,7 +18,7 @@ $config = [
 $config['apiGouvBaseUrl'] . $config['apiGouvDepartmentsPath'] . '?' . http_build_query($config['apiGouvDepartmentsQuery'])
     |> file_get_contents(...)
     |> (fn($x) => json_decode(json: $x, associative: true, flags: JSON_THROW_ON_ERROR,))
-    |> (fn($x) => json_encode(value: $x, flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,))
+    |> (fn($x) => json_encode(value: $x, flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,))
     |> (fn($x) => file_put_contents(filename: $config['departmentsDataFile'], data: $x,));
 
 // Extract department codes
@@ -29,16 +29,13 @@ $departmentsCodes = $config['departmentsDataFile']
 
 echo 'DEPARTMENTS_CODES:'.implode(', ', $departmentsCodes).PHP_EOL;
 
-$communesUrlStart = $config['apiGouvBaseUrl'].$config['apiGouvDepartmentsPath'];
-$communesUrlEnd = $config['apiGouvCommunesPath'].'?'.http_build_query($config['apiGouvCommunesQuery']);
-
 // Retrieve and save the communes data for each department
 foreach ($departmentsCodes as $departmentCode) {
     echo 'DEPARTMENT_CODE: '.$departmentCode.PHP_EOL;
-    $departmentData = $config['apiGouvBaseUrl'] . $config['apiGouvDepartmentsPath'] . '/' . $departmentCode . $communesUrlEnd
+    $departmentData = $config['apiGouvBaseUrl'] . $config['apiGouvDepartmentsPath'] . '/' . $departmentCode . $config['apiGouvCommunesPath'].'?'.http_build_query($config['apiGouvCommunesQuery'])
         |> file_get_contents(...)
         |> (fn($x) => json_decode(json: $x, associative: true, flags: JSON_THROW_ON_ERROR,))
-        |> (fn($x) => json_encode(value: $x, flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,));
+        |> (fn($x) => json_encode(value: $x, flags: JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,));
     file_put_contents(
         filename: sprintf($config['communesDataFilePattern'], $departmentCode),
         data: $departmentData,

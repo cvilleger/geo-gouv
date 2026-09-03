@@ -10,8 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
 final class GeoGouvTest extends TestCase
 {
