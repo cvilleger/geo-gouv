@@ -23,3 +23,6 @@ jobs:
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
       - run: "vendor/bin/phpstan"
       - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --colors=auto"
+      - uses: codecov/codecov-action@v7
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
