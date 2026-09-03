@@ -19,8 +19,15 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.5
-          coverage: none
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
       - run: "vendor/bin/phpstan"
-      - run: "vendor/bin/phpunit"
+      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --colors=auto --coverage-text --log-junit junit.xml --coverage-clover coverage.xml"
+      - uses: codecov/codecov-action@v7
+        with:
+          report_type: coverage
+          files: ./coverage.xml
+      - uses: codecov/codecov-action@v7
+        with:
+          report_type: test_results
+          files: ./junit.xml
