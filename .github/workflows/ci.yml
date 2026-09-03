@@ -22,7 +22,7 @@ jobs:
       - run: "composer install --no-interaction"
       - run: "vendor/bin/php-cs-fixer fix --dry-run -v"
       - run: "vendor/bin/phpstan"
-      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --colors=auto"
+      - run: "XDEBUG_MODE=coverage vendor/bin/phpunit --colors=auto --coverage-text --coverage-clover coverage.xml "
       - uses: codecov/codecov-action@v7
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
