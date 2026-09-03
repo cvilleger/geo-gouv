@@ -1,4 +1,5 @@
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cvilleger/geo-gouv/ci.yml?style=for-the-badge&branch=main)](https://github.com/cvilleger/geo-gouv/actions/workflows/ci.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/cvilleger/geo-cov?style=for-the-badge)](https://app.codecov.io/gh/cvilleger/geo-gouv)
 [![Packagist Version](https://img.shields.io/packagist/v/cvilleger/geo-gouv?style=for-the-badge)](https://packagist.org/packages/cvilleger/geo-gouv)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/cvilleger/geo-gouv?style=for-the-badge)](https://packagist.org/packages/cvilleger/geo-gouv)
 [![GitHub License](https://img.shields.io/github/license/cvilleger/geo-gouv?style=for-the-badge)](https://github.com/cvilleger/geo-gouv?tab=MIT-1-ov-file#readme)
